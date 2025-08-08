@@ -91,7 +91,7 @@ const FAQ = () => {
     payments: [
       {
         question: "How much does it cost to use PR GuestPost?",
-        answer: "For buyers, the price shown on each listing includes both the publisher's base price and our 25% platform fee. There are no additional hidden charges. For publishers, listing your website is free, but we take a 25% commission on each successful transaction."
+        answer: "For buyers, the price shown on each listing is the total cost with no hidden charges. For publishers, listing your website is free, and we handle all payment processing securely."
       },
       {
         question: "What payment methods are accepted?",
