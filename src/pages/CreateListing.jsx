@@ -30,6 +30,47 @@ const CreateListing = () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Add the new listing to mock data (in a real app, this would be an API call)
+      const newListing = {
+        id: Date.now(),
+        title: data.title,
+        description: data.description,
+        niche: data.niche,
+        nicheId: data.niche.toLowerCase().replace(/\s+/g, '-'),
+        da: parseInt(data.domainAuthority) || 50,
+        traffic: data.monthlyTraffic || '10K',
+        price: parseInt(data.basePrice),
+        basePrice: parseInt(data.basePrice),
+        rating: 5.0,
+        reviews: 0,
+        turnaround: data.turnaround,
+        featured: false,
+        website: data.websiteUrl,
+        languages: [{ code: 'en', name: 'English' }],
+        publisher: {
+          name: user.name,
+          avatar: user.avatar,
+          rating: 5.0,
+          completedOrders: 0,
+          responseTime: '2 hours'
+        },
+        guidelines: data.contentGuidelines ? data.contentGuidelines.split('\n').filter(g => g.trim()) : [],
+        sampleArticles: [],
+        analytics: {
+          monthlyVisitors: data.monthlyTraffic || '10K',
+          bounceRate: '35%',
+          avgSessionDuration: '2:30',
+          topCountries: ['United States', 'United Kingdom', 'Canada']
+        },
+        createdAt: new Date()
+      };
+      
+      // Store in localStorage for demo purposes
+      const existingListings = JSON.parse(localStorage.getItem('userListings') || '[]');
+      existingListings.push(newListing);
+      localStorage.setItem('userListings', JSON.stringify(existingListings));
+      
       toast.success('Listing created successfully! It will be reviewed by our team.');
       navigate('/dashboard');
     } catch (error) {
@@ -206,7 +247,7 @@ const CreateListing = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Your Base Price (USD) *
+                  Your Price (USD) *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -228,41 +269,7 @@ const CreateListing = () => {
                 {errors.basePrice && (
                   <p className="mt-1 text-sm text-red-600">{errors.basePrice.message}</p>
                 )}
-                <p className="mt-1 text-sm text-gray-500">Amount you'll receive</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Platform Fee (25%)
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <SafeIcon icon={FiDollarSign} className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    value={basePrice ? (basePrice * 0.25).toFixed(0) : '0'}
-                    disabled
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                  />
-                </div>
-                <p className="mt-1 text-sm text-gray-500">Automatic calculation</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Final Price for Buyers
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <SafeIcon icon={FiDollarSign} className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    value={finalPrice}
-                    disabled
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500 font-semibold"
-                  />
-                </div>
-                <p className="mt-1 text-sm text-gray-500">What buyers will pay</p>
+                <p className="mt-1 text-sm text-gray-500">Price for guest posts</p>
               </div>
             </div>
             <div className="mt-4 p-4 bg-blue-50 rounded-lg">
@@ -270,7 +277,7 @@ const CreateListing = () => {
                 <SafeIcon icon={FiInfo} className="h-5 w-5 text-blue-400 mt-0.5 mr-3" />
                 <div className="text-sm text-blue-700">
                   <p className="font-medium">Pricing Information</p>
-                  <p>Our platform charges a 25% commission on all transactions. This fee covers payment processing, platform maintenance, and customer support.</p>
+                  <p>Set your desired price for guest posts. Our platform handles secure payment processing and provides comprehensive support.</p>
                 </div>
               </div>
             </div>

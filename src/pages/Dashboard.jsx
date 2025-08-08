@@ -46,7 +46,7 @@ const Dashboard = () => {
           </h1>
           <p className="text-gray-600 mt-2">
             {user?.role === 'publisher' 
-              ? 'Manage your listings and track your earnings'
+              ? 'Manage your website listings and track your performance'
               : 'Track your campaigns and discover new opportunities'
             }
           </p>
@@ -88,21 +88,21 @@ const Dashboard = () => {
               <div className="space-y-3">
                 {user?.role === 'publisher' ? (
                   <>
-                    <button className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                    <Link to="/create-listing" className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
                       <SafeIcon icon={FiPlus} className="h-5 w-5 mr-2" />
                       Create New Listing
-                    </button>
-                    <button className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    </Link>
+                    <Link to="/my-websites" className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                       <SafeIcon icon={FiEye} className="h-5 w-5 mr-2" />
-                      View Analytics
-                    </button>
+                      My Websites
+                    </Link>
                   </>
                 ) : (
                   <>
-                    <button className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                    <Link to="/marketplace" className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
                       <SafeIcon icon={FiEye} className="h-5 w-5 mr-2" />
                       Browse Marketplace
-                    </button>
+                    </Link>
                     <button className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                       <SafeIcon icon={FiTrendingUp} className="h-5 w-5 mr-2" />
                       Campaign Analytics

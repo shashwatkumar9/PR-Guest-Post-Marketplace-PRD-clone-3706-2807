@@ -49,7 +49,7 @@ const Navbar = () => {
                   : 'text-gray-700 hover:text-primary-600'
               } transition-colors duration-200`}
             >
-              Marketplace
+              {user?.role === 'publisher' ? 'Browse Publishers' : 'Marketplace'}
             </Link>
 
             {user ? (

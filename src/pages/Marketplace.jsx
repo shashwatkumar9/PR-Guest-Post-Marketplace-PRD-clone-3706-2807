@@ -315,15 +315,9 @@ const Marketplace = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <div className="text-2xl font-bold text-gray-900">${listing.price}</div>
-                    {user && user.role === 'publisher' ? (
-                      <div className="text-xs text-gray-500">
-                        Your earn: ${listing.basePrice}
-                      </div>
-                    ) : (
-                      <div className="text-xs text-gray-500">
-                        Includes 25% platform fee
-                      </div>
-                    )}
+                    <div className="text-xs text-gray-500">
+                      Guest post price
+                    </div>
                   </div>
                 </div>
 

@@ -177,15 +177,9 @@ const ListingDetails = () => {
             >
               <div className="text-center mb-6">
                 <div className="text-3xl font-bold text-gray-900">${listing.price}</div>
-                {user && user.role === 'publisher' ? (
-                  <div className="text-sm text-gray-500">
-                    You earn: ${listing.basePrice}
-                  </div>
-                ) : (
-                  <div className="text-sm text-gray-500">
-                    Includes 25% platform fee
-                  </div>
-                )}
+                <div className="text-sm text-gray-500">
+                  Guest post price
+                </div>
               </div>
 
               <div className="space-y-4 mb-6">

@@ -20,6 +20,7 @@ import AdminPanel from './pages/admin/AdminPanel';
 import Profile from './pages/Profile';
 import Messages from './pages/Messages';
 import Transactions from './pages/Transactions';
+import MyWebsites from './pages/MyWebsites';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 
@@ -54,6 +55,7 @@ function App() {
                   <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                   <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
                   <Route path="/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
+                  <Route path="/my-websites" element={<ProtectedRoute><MyWebsites /></ProtectedRoute>} />
                   <Route path="/admin/*" element={<ProtectedRoute adminOnly><AdminPanel /></ProtectedRoute>} />
                   
                   {/* Blog Routes */}
