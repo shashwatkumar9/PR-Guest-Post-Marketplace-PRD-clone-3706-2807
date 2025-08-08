@@ -91,7 +91,7 @@ const FAQ = () => {
     payments: [
       {
         question: "How much does it cost to use PR GuestPost?",
-        answer: "For buyers, the price shown on each listing is the total cost with no hidden charges. For publishers, listing your website is free, and we handle all payment processing securely."
+        answer: "For buyers, the price shown on each listing includes both the publisher's base price and our 25% platform fee. There are no additional hidden charges. For publishers, listing your website is free, but we take a 25% commission on each successful transaction."
       },
       {
         question: "What payment methods are accepted?",
@@ -103,7 +103,7 @@ const FAQ = () => {
       },
       {
         question: "Are there any discounts for bulk orders?",
-        answer: "Yes, we offer discounts for bulk orders. If you're planning to purchase multiple guest posts, contact our support team to discuss custom pricing options. Discounts typically start at orders of 5+ guest posts and increase with larger volumes."
+        answer: "Yes, we offer discounts for bulk orders. If you're planning to purchase multiple guest posts, contact our support team to discuss custom pricing options. Volume discounts are available for larger orders."
       },
       {
         question: "How does the escrow system work?",

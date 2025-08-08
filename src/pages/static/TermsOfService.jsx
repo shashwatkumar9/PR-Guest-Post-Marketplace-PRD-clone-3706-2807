@@ -111,10 +111,10 @@ const TermsOfService = () => {
             
             <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">7. Fees and Payments</h2>
             <p>
-              We charge a Platform Fee of 25% on all transactions between Buyers and Publishers. This fee is added to the Publisher's base price and is included in the total price shown to Buyers.
+              We charge a platform fee on all transactions between Buyers and Publishers. This fee is included in the total price shown to Buyers.
             </p>
             <p>
-              Publishers receive 75% of the total amount paid by Buyers for their services. Payments to Publishers are processed according to our payment schedule, which may be updated from time to time.
+              Publishers receive payment for their services according to our payment schedule, which may be updated from time to time.
             </p>
             <p>
               All payments are processed through our secure payment system. We do not store credit card information on our servers.

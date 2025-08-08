@@ -220,7 +220,12 @@ export const generateMockListings = (count = 50) => {
 };
 
 // Export the generated mock listings
-export const MOCK_LISTINGS = generateMockListings(50);
+export const MOCK_LISTINGS = (() => {
+  const generated = generateMockListings(50);
+  // Add any user-created listings from localStorage
+  const userListings = JSON.parse(localStorage.getItem('userListings') || '[]');
+  return [...generated, ...userListings];
+})();
 
 // Export function to get listing by ID
 export const getListingById = (id) => {

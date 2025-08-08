@@ -180,6 +180,7 @@ const AdminSettings = () => {
                   {errors.platformCommission && (
                     <p className="mt-1 text-sm text-red-600">{errors.platformCommission.message}</p>
                   )}
+                  <p className="mt-1 text-sm text-gray-500">Current: 25% (hidden from users)</p>
                 </div>
 
                 <div>
