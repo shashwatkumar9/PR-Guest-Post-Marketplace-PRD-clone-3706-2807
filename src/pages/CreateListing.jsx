@@ -17,7 +17,7 @@ const CreateListing = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   
   const basePrice = watch('basePrice');
-  const finalPrice = basePrice ? Math.round(basePrice * 1.25) : 0;
+  const finalPrice = basePrice ? parseInt(basePrice) : 0;
   
   const niches = [
     'Technology', 'Health & Wellness', 'Finance', 'Business', 'Lifestyle',
@@ -33,7 +33,7 @@ const CreateListing = () => {
       
       // Add the new listing to mock data (in a real app, this would be an API call)
       const newListing = {
-        id: Date.now(),
+        id: `listing-${Date.now()}`,
         title: data.title,
         description: data.description,
         niche: data.niche,
@@ -63,6 +63,7 @@ const CreateListing = () => {
           avgSessionDuration: '2:30',
           topCountries: ['United States', 'United Kingdom', 'Canada']
         },
+        status: 'pending', // Set initial status to pending for admin review
         createdAt: new Date()
       };
       
@@ -71,9 +72,17 @@ const CreateListing = () => {
       existingListings.push(newListing);
       localStorage.setItem('userListings', JSON.stringify(existingListings));
       
-      toast.success('Listing created successfully! It will be reviewed by our team.');
+      // Store pending listings separately for admin review
+      const pendingListings = JSON.parse(localStorage.getItem('pendingListings') || '[]');
+      pendingListings.push(newListing);
+      localStorage.setItem('pendingListings', JSON.stringify(pendingListings));
+      
+      // Note: We don't add to MOCK_LISTINGS immediately anymore - it will be added after admin approval
+      
+      toast.success('Listing created successfully! It will be reviewed by our team before appearing in the marketplace.');
       navigate('/dashboard');
     } catch (error) {
+      console.error('Error creating listing:', error);
       toast.error('Failed to create listing');
     } finally {
       setLoading(false);

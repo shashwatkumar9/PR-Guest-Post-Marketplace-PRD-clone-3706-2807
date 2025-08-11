@@ -14,169 +14,36 @@ const BlogPost = () => {
   const [relatedPosts, setRelatedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Mock blog posts data (in a real app, this would come from an API call)
-  const blogPosts = [
-    {
-      id: 1,
-      title: "10 Strategies for Effective Guest Posting in 2024",
-      slug: "strategies-effective-guest-posting-2024",
-      excerpt: "Learn the top strategies for successful guest posting campaigns that drive traffic and build authority in today's competitive digital landscape.",
-      content: `
-        <h2>Introduction to Guest Posting in 2024</h2>
-        <p>Guest posting remains one of the most effective strategies for building backlinks, increasing brand awareness, and establishing authority in your industry. As we move through 2024, the landscape continues to evolve, with search engines becoming smarter and audiences more discerning.</p>
-        <p>In this comprehensive guide, we'll explore the most effective guest posting strategies that are working right now, backed by data and real-world examples.</p>
-        
-        <h2>1. Focus on Relevance Over Domain Authority</h2>
-        <p>While domain authority has traditionally been the primary metric for evaluating guest posting opportunities, relevance has become increasingly important. Google's algorithms now prioritize contextual relevance over raw domain metrics.</p>
-        <p>A highly relevant site with moderate authority will often provide more value than a high-authority site with minimal topical relevance to your business.</p>
-        
-        <h2>2. Create Data-Driven, Original Content</h2>
-        <p>Publishers are increasingly selective about the content they accept. Generic, rehashed articles no longer make the cut. Instead, focus on creating:</p>
-        <ul>
-          <li>Original research and surveys</li>
-          <li>Data-backed insights and analysis</li>
-          <li>Expert interviews and unique perspectives</li>
-          <li>Case studies from your own experience</li>
-        </ul>
-        <p>This approach not only increases your acceptance rate but also maximizes the impact of your published content.</p>
-        
-        <h2>3. Build Relationships Before Pitching</h2>
-        <p>Cold outreach success rates continue to decline as publishers are inundated with guest post requests. Instead of immediate pitching, focus on relationship building:</p>
-        <ul>
-          <li>Engage with the publisher's content on social media</li>
-          <li>Leave thoughtful comments on their existing articles</li>
-          <li>Share their content with your audience</li>
-          <li>Connect on LinkedIn or Twitter before pitching</li>
-        </ul>
-        <p>Publishers are much more receptive to contributors they recognize and have interacted with previously.</p>
-        
-        <h2>4. Leverage Multimedia Content</h2>
-        <p>Text-only guest posts are becoming less engaging in today's visual-first internet. Enhance your guest posts with:</p>
-        <ul>
-          <li>Custom infographics and data visualizations</li>
-          <li>Embedded videos or tutorials</li>
-          <li>Interactive elements where appropriate</li>
-          <li>High-quality, original images</li>
-        </ul>
-        <p>Publishers value content that keeps visitors engaged longer and reduces bounce rates.</p>
-        
-        <h2>5. Prioritize User Experience and Readability</h2>
-        <p>With Google's Core Web Vitals and user experience signals gaining importance, ensure your guest posts are:</p>
-        <ul>
-          <li>Well-structured with clear headings</li>
-          <li>Written in scannable, concise paragraphs</li>
-          <li>Free of excessive jargon</li>
-          <li>Mobile-friendly in layout and formatting</li>
-        </ul>
-        <p>Publishers increasingly favor content that contributes to positive site metrics.</p>
-        
-        <h2>6. Target Industry-Specific Publications</h2>
-        <p>Rather than pursuing general high-authority sites, focus on publications specifically serving your industry. These targeted placements often deliver:</p>
-        <ul>
-          <li>More qualified referral traffic</li>
-          <li>Higher engagement rates</li>
-          <li>Better conversion potential</li>
-          <li>More valuable industry connections</li>
-        </ul>
-        <p>A guest post on a niche site with 10,000 targeted monthly visitors often outperforms one on a general site with millions of irrelevant visitors.</p>
-        
-        <h2>7. Optimize Author Bios for Conversion</h2>
-        <p>Your author bio is not just a credential space—it's a mini-conversion opportunity. Effective author bios:</p>
-        <ul>
-          <li>Establish relevant expertise quickly</li>
-          <li>Include a specific call-to-action</li>
-          <li>Link to a targeted landing page, not just your homepage</li>
-          <li>Offer a specific resource related to the article topic</li>
-        </ul>
-        <p>Customizing your bio for each guest post can significantly increase click-through rates.</p>
-        
-        <h2>8. Create Comprehensive Content</h2>
-        <p>Superficial, thin content rarely performs well in today's content ecosystem. Instead, create comprehensive resources that:</p>
-        <ul>
-          <li>Cover topics in substantial depth (1500+ words where appropriate)</li>
-          <li>Answer all related questions a reader might have</li>
-          <li>Provide actionable takeaways and implementation steps</li>
-          <li>Link to high-quality supporting resources</li>
-        </ul>
-        <p>This approach positions your guest contributions as authoritative resources rather than basic articles.</p>
-        
-        <h2>9. Leverage Strategic Internal Linking</h2>
-        <p>When appropriate and permitted by the publisher, include contextual links to other articles on their site. This practice:</p>
-        <ul>
-          <li>Demonstrates familiarity with their content</li>
-          <li>Increases the value of your contribution</li>
-          <li>Improves user experience through relevant resources</li>
-          <li>Builds goodwill with the editorial team</li>
-        </ul>
-        <p>Publishers appreciate contributors who help strengthen their overall site architecture.</p>
-        
-        <h2>10. Measure and Refine Your Strategy</h2>
-        <p>Effective guest posting requires continuous optimization. Track key metrics including:</p>
-        <ul>
-          <li>Referral traffic quality and quantity</li>
-          <li>Conversion rates from guest post traffic</li>
-          <li>Engagement metrics (time on page, bounce rate)</li>
-          <li>SEO impact over time</li>
-          <li>Relationship development with publishers</li>
-        </ul>
-        <p>Use these insights to refine your approach, doubling down on what works and adjusting what doesn't.</p>
-        
-        <h2>Conclusion</h2>
-        <p>Guest posting remains a powerful strategy when executed with quality and strategic intent. By implementing these ten strategies, you'll maximize the impact of your guest posting campaigns in 2024 and beyond, building valuable backlinks, increasing brand visibility, and establishing industry authority.</p>
-        <p>Remember that consistency is key—a sustained guest posting strategy yields compounding benefits over time, while sporadic efforts rarely deliver meaningful results.</p>
-      `,
-      featuredImage: "https://images.unsplash.com/photo-1516414447565-b14be0adf13e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "marketing",
-      nicheName: "Marketing & Advertising",
-      tags: ["guest posting", "content marketing", "SEO"],
-      author: "Jessica Miller",
-      authorBio: "Jessica Miller is a Content Marketing Strategist with over 10 years of experience in digital marketing and SEO. She has helped numerous businesses improve their online visibility through effective content strategies.",
-      authorAvatar: "https://ui-avatars.com/api/?name=Jessica+Miller&background=0ea5e9&color=fff",
-      publishedAt: new Date("2024-01-15"),
-      readTime: "8 min read",
-      views: 1245
-    },
-    {
-      id: 2,
-      title: "How to Choose the Right Websites for Your Guest Posts",
-      slug: "choose-right-websites-guest-posts",
-      excerpt: "Discover how to identify and select high-quality websites for your guest posting strategy that will maximize your ROI and boost your online presence.",
-      content: "<p>Full content here...</p>",
-      featuredImage: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "marketing",
-      nicheName: "Marketing & Advertising",
-      tags: ["website selection", "domain authority", "guest posting"],
-      author: "Michael Thompson",
-      authorBio: "Michael Thompson is a Digital Marketing Consultant specializing in SEO and content strategy. He has worked with startups and Fortune 500 companies to improve their digital marketing results.",
-      authorAvatar: "https://ui-avatars.com/api/?name=Michael+Thompson&background=10b981&color=fff",
-      publishedAt: new Date("2024-02-10"),
-      readTime: "6 min read",
-      views: 978
-    },
-    {
-      id: 3,
-      title: "The Impact of Guest Posting on SEO Performance",
-      slug: "impact-guest-posting-seo-performance",
-      excerpt: "Analyze how guest posting affects your website's search engine rankings and overall SEO strategy with real-world case studies and data.",
-      content: "<p>Full content here...</p>",
-      featuredImage: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "seo",
-      nicheName: "SEO",
-      tags: ["SEO", "backlinks", "domain authority"],
-      author: "Sarah Johnson",
-      authorBio: "Sarah Johnson is an SEO Specialist with expertise in link building and technical SEO. She has helped numerous websites achieve top rankings in competitive niches.",
-      authorAvatar: "https://ui-avatars.com/api/?name=Sarah+Johnson&background=f59e0b&color=fff",
-      publishedAt: new Date("2024-03-05"),
-      readTime: "10 min read",
-      views: 1543
-    },
-    // Additional posts would be here
-  ];
+  // Load blog posts from localStorage
+  const [blogPosts, setBlogPosts] = useState([]);
+
+  // Load blog posts from localStorage on component mount
+  useEffect(() => {
+    try {
+      // Get blog posts from localStorage
+      const storedPosts = localStorage.getItem('blogPosts');
+      
+      if (storedPosts) {
+        // Parse the stored posts and ensure dates are properly converted
+        const parsedPosts = JSON.parse(storedPosts).map(post => ({
+          ...post,
+          publishedAt: new Date(post.publishedAt)
+        }));
+        setBlogPosts(parsedPosts);
+      }
+    } catch (error) {
+      console.error('Error loading blog posts from localStorage:', error);
+      // If there's an error, set an empty array
+      setBlogPosts([]);
+    }
+  }, []);
 
   useEffect(() => {
-    // Simulate API fetch with a delay
-    setLoading(true);
-    setTimeout(() => {
+    // Only proceed if blogPosts has been loaded and slug is available
+    if (blogPosts.length > 0 && slug) {
+      setLoading(true);
+      
+      // Find the post with matching slug
       const foundPost = blogPosts.find(post => post.slug === slug);
       
       if (foundPost) {
@@ -198,8 +65,8 @@ const BlogPost = () => {
       
       // Scroll to top when post changes
       window.scrollTo(0, 0);
-    }, 300);
-  }, [slug]);
+    }
+  }, [blogPosts, slug]); // Depend on blogPosts and slug
 
   if (loading) {
     return (
@@ -400,6 +267,7 @@ const BlogPost = () => {
               ))}
             </div>
           </motion.div>
+
           
           {/* Author Bio */}
           <motion.div

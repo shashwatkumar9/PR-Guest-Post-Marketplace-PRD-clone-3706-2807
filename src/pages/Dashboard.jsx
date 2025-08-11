@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -103,10 +104,10 @@ const Dashboard = () => {
                       <SafeIcon icon={FiEye} className="h-5 w-5 mr-2" />
                       Browse Marketplace
                     </Link>
-                    <button className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <Link to="/transactions" className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                       <SafeIcon icon={FiTrendingUp} className="h-5 w-5 mr-2" />
-                      Campaign Analytics
-                    </button>
+                      My Transactions
+                    </Link>
                   </>
                 )}
               </div>

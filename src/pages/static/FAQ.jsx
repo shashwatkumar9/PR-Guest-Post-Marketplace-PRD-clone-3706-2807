@@ -55,7 +55,7 @@ const FAQ = () => {
       },
       {
         question: "How much can I earn as a publisher?",
-        answer: "Your earnings depend on factors like your website's domain authority, niche, traffic, and content quality. Publishers on our platform set their own base prices, and we add a 25% platform fee on top. You receive 100% of your set base price for each published guest post."
+        answer: "Your earnings depend on factors like your website's domain authority, niche, traffic, and content quality. Publishers on our platform set their own prices and receive payment for each successfully published guest post."
       },
       {
         question: "How and when do I get paid?",
@@ -91,7 +91,7 @@ const FAQ = () => {
     payments: [
       {
         question: "How much does it cost to use PR GuestPost?",
-        answer: "For buyers, the price shown on each listing includes both the publisher's base price and our 25% platform fee. There are no additional hidden charges. For publishers, listing your website is free, but we take a 25% commission on each successful transaction."
+        answer: "For buyers, the price shown on each listing is the final price you'll pay. There are no additional hidden charges. For publishers, listing your website is completely free."
       },
       {
         question: "What payment methods are accepted?",

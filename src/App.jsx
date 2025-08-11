@@ -48,7 +48,10 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
-                  <Route path="/marketplace" element={<Marketplace />} />
+                  <Route path="/marketplace" element={<ProtectedRoute>
+                    <Marketplace />
+                  </ProtectedRoute>} />
+                  <Route path="/browse-publishers" element={<Marketplace />} />
                   <Route path="/listing/:id" element={<ListingDetails />} />
                   <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                   <Route path="/create-listing" element={<ProtectedRoute><CreateListing /></ProtectedRoute>} />

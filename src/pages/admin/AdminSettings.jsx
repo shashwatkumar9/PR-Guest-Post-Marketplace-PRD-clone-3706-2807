@@ -13,7 +13,7 @@ const AdminSettings = () => {
   
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      platformCommission: 25,
+      platformCommission: 20,
       minimumPayout: 50,
       payoutSchedule: 'monthly',
       smtpHost: '',

@@ -15,126 +15,26 @@ const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
 
-  // Mock blog posts data (in a real app, this would come from an API call)
-  const blogPosts = [
-    {
-      id: 1,
-      title: "10 Strategies for Effective Guest Posting in 2024",
-      slug: "strategies-effective-guest-posting-2024",
-      excerpt: "Learn the top strategies for successful guest posting campaigns that drive traffic and build authority in today's competitive digital landscape.",
-      featuredImage: "https://images.unsplash.com/photo-1516414447565-b14be0adf13e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "marketing",
-      nicheName: "Marketing & Advertising",
-      tags: ["guest posting", "content marketing", "SEO"],
-      author: "Jessica Miller",
-      publishedAt: new Date("2024-01-15"),
-      readTime: "8 min read"
-    },
-    {
-      id: 2,
-      title: "How to Choose the Right Websites for Your Guest Posts",
-      slug: "choose-right-websites-guest-posts",
-      excerpt: "Discover how to identify and select high-quality websites for your guest posting strategy that will maximize your ROI and boost your online presence.",
-      featuredImage: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "marketing",
-      nicheName: "Marketing & Advertising",
-      tags: ["website selection", "domain authority", "guest posting"],
-      author: "Michael Thompson",
-      publishedAt: new Date("2024-02-10"),
-      readTime: "6 min read"
-    },
-    {
-      id: 3,
-      title: "The Impact of Guest Posting on SEO Performance",
-      slug: "impact-guest-posting-seo-performance",
-      excerpt: "Analyze how guest posting affects your website's search engine rankings and overall SEO strategy with real-world case studies and data.",
-      featuredImage: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "seo",
-      nicheName: "SEO",
-      tags: ["SEO", "backlinks", "domain authority"],
-      author: "Sarah Johnson",
-      publishedAt: new Date("2024-03-05"),
-      readTime: "10 min read"
-    },
-    {
-      id: 4,
-      title: "Writing Compelling Guest Post Pitches That Get Accepted",
-      slug: "writing-compelling-guest-post-pitches",
-      excerpt: "Learn how to craft guest post pitches that stand out and get accepted by top publishers, with templates and real examples of successful pitches.",
-      featuredImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "writing",
-      nicheName: "Content Writing",
-      tags: ["pitching", "content writing", "outreach"],
-      author: "David Wilson",
-      publishedAt: new Date("2024-03-20"),
-      readTime: "7 min read"
-    },
-    {
-      id: 5,
-      title: "Measuring ROI from Your Guest Posting Campaigns",
-      slug: "measuring-roi-guest-posting-campaigns",
-      excerpt: "Discover effective methods to track and measure the return on investment from your guest posting efforts using analytics and attribution models.",
-      featuredImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "business",
-      nicheName: "Business",
-      tags: ["ROI", "analytics", "marketing metrics"],
-      author: "Emily Roberts",
-      publishedAt: new Date("2024-04-02"),
-      readTime: "9 min read"
-    },
-    {
-      id: 6,
-      title: "Guest Posting vs. Other Link Building Strategies: A Comparison",
-      slug: "guest-posting-vs-other-link-building-strategies",
-      excerpt: "Compare the effectiveness, costs, and long-term benefits of guest posting against other popular link building methods in modern SEO.",
-      featuredImage: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "seo",
-      nicheName: "SEO",
-      tags: ["link building", "SEO strategy", "digital marketing"],
-      author: "James Anderson",
-      publishedAt: new Date("2024-04-15"),
-      readTime: "11 min read"
-    },
-    {
-      id: 7,
-      title: "How to Scale Your Guest Posting Strategy for Maximum Impact",
-      slug: "scale-guest-posting-strategy-maximum-impact",
-      excerpt: "Learn proven methods to scale your guest posting efforts efficiently while maintaining quality and maximizing the impact on your SEO and brand authority.",
-      featuredImage: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "marketing",
-      nicheName: "Marketing & Advertising",
-      tags: ["scaling strategies", "content marketing", "guest posting"],
-      author: "Jennifer Lee",
-      publishedAt: new Date("2024-05-01"),
-      readTime: "8 min read"
-    },
-    {
-      id: 8,
-      title: "The Future of Guest Posting: Trends and Predictions",
-      slug: "future-guest-posting-trends-predictions",
-      excerpt: "Explore emerging trends and expert predictions about the future of guest posting in an evolving digital marketing landscape.",
-      featuredImage: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "technology",
-      nicheName: "Technology",
-      tags: ["future trends", "digital marketing", "content strategy"],
-      author: "Robert Chen",
-      publishedAt: new Date("2024-05-15"),
-      readTime: "10 min read"
-    },
-    {
-      id: 9,
-      title: "Building Relationships with Publishers: A Guide for Guest Posters",
-      slug: "building-relationships-publishers-guide",
-      excerpt: "Discover strategies for building long-term, mutually beneficial relationships with publishers that can lead to ongoing guest posting opportunities.",
-      featuredImage: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "business",
-      nicheName: "Business",
-      tags: ["networking", "publisher relationships", "outreach"],
-      author: "Sophia Martinez",
-      publishedAt: new Date("2024-05-20"),
-      readTime: "7 min read"
-    }
-  ];
+  // State for blog posts
+  const [blogPosts, setBlogPosts] = useState([]);
+  
+  // Load blog posts from localStorage
+  useEffect(() => {
+    // Get blog posts from localStorage
+    const storedBlogPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+    
+    // Filter only published posts
+    const publishedPosts = storedBlogPosts.filter(post => post.status === 'published');
+    
+    // Process dates and add read time if not present
+    const processedPosts = publishedPosts.map(post => ({
+      ...post,
+      publishedAt: post.publishedAt ? new Date(post.publishedAt) : null,
+      readTime: post.readTime || `${Math.ceil(post.content.length / 1000)} min read` // Estimate read time based on content length
+    }));
+    
+    setBlogPosts(processedPosts);
+  }, []);
 
   // Get blog categories from posts
   const categories = [...new Set(blogPosts.map(post => post.nicheName))];

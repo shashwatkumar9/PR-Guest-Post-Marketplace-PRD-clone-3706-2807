@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import SafeIcon from '../../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
 const { FiSearch, FiFilter, FiEye, FiCheck, FiX, FiStar } = FiIcons;
 
@@ -10,8 +11,13 @@ const AdminListings = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [nicheFilter, setNicheFilter] = useState('all');
+  const [listings, setListings] = useState([]);
+  const [rejectionReason, setRejectionReason] = useState('');
+  const [showRejectionModal, setShowRejectionModal] = useState(false);
+  const [selectedListingId, setSelectedListingId] = useState(null);
 
-  const listings = [
+  // Sample mock listings for initial display
+  const mockListings = [
     {
       id: 1,
       title: 'TechCrunch Style Blog',
@@ -75,12 +81,38 @@ const AdminListings = () => {
     }
   ];
 
+  // Load listings including pending ones from localStorage
+  useEffect(() => {
+    // Get pending listings from localStorage
+    const pendingListings = JSON.parse(localStorage.getItem('pendingListings') || '[]');
+    
+    // Combine with mock listings
+    const combinedListings = [...mockListings];
+    
+    // Add any pending listings that aren't already in the mock listings
+    pendingListings.forEach(pendingListing => {
+      if (!combinedListings.some(listing => listing.id === pendingListing.id)) {
+        combinedListings.push({
+          ...pendingListing,
+          submittedDate: new Date(pendingListing.createdAt)
+        });
+      }
+    });
+    
+    setListings(combinedListings);
+  }, []);
+
   const niches = ['Technology', 'Health & Wellness', 'Finance', 'Business', 'Lifestyle'];
 
   const filteredListings = listings.filter(listing => {
-    const matchesSearch = listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         listing.publisher.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         listing.website.toLowerCase().includes(searchTerm.toLowerCase());
+    // Handle both formats of publisher data (string or object with name property)
+    const publisherName = typeof listing.publisher === 'string' 
+      ? listing.publisher 
+      : (listing.publisher?.name || '');
+      
+    const matchesSearch = listing.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         publisherName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         listing.website?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || listing.status === statusFilter;
     const matchesNiche = nicheFilter === 'all' || listing.niche === nicheFilter;
     
@@ -100,14 +132,72 @@ const AdminListings = () => {
     }
   };
 
-  const handleApprove = (id) => {
-    // In real app, make API call
-    console.log('Approving listing:', id);
+  const handleApprove = async (id) => {
+    try {
+      // Find the listing to approve
+      const listingToApprove = listings.find(listing => listing.id === id);
+      if (!listingToApprove) return;
+      
+      // Update status in our local state
+      const updatedListings = listings.map(listing => 
+        listing.id === id ? { ...listing, status: 'approved' } : listing
+      );
+      setListings(updatedListings);
+      
+      // Update in pendingListings localStorage
+      const pendingListings = JSON.parse(localStorage.getItem('pendingListings') || '[]');
+      const updatedPendingListings = pendingListings.filter(listing => listing.id !== id);
+      localStorage.setItem('pendingListings', JSON.stringify(updatedPendingListings));
+      
+      // Add to MOCK_LISTINGS for display in marketplace
+      const { MOCK_LISTINGS } = await import('../../data/mockListings');
+      MOCK_LISTINGS.unshift(listingToApprove);
+      
+      toast.success(`Listing "${listingToApprove.title}" has been approved and added to the marketplace.`);
+    } catch (error) {
+      console.error('Error approving listing:', error);
+      toast.error('Failed to approve listing');
+    }
   };
 
-  const handleReject = (id) => {
-    // In real app, make API call
-    console.log('Rejecting listing:', id);
+  const openRejectModal = (id) => {
+    setSelectedListingId(id);
+    setRejectionReason('');
+    setShowRejectionModal(true);
+  };
+
+  const handleReject = async () => {
+    try {
+      if (!selectedListingId || !rejectionReason.trim()) {
+        toast.error('Please provide a reason for rejection');
+        return;
+      }
+      
+      // Find the listing to reject
+      const listingToReject = listings.find(listing => listing.id === selectedListingId);
+      if (!listingToReject) return;
+      
+      // Update status in our local state
+      const updatedListings = listings.map(listing => 
+        listing.id === selectedListingId ? 
+          { ...listing, status: 'rejected', rejectionReason } : listing
+      );
+      setListings(updatedListings);
+      
+      // Update in pendingListings localStorage
+      const pendingListings = JSON.parse(localStorage.getItem('pendingListings') || '[]');
+      const updatedPendingListings = pendingListings.filter(listing => listing.id !== selectedListingId);
+      localStorage.setItem('pendingListings', JSON.stringify(updatedPendingListings));
+      
+      // Close modal
+      setShowRejectionModal(false);
+      setSelectedListingId(null);
+      
+      toast.success(`Listing "${listingToReject.title}" has been rejected.`);
+    } catch (error) {
+      console.error('Error rejecting listing:', error);
+      toast.error('Failed to reject listing');
+    }
   };
 
   return (
@@ -255,7 +345,7 @@ const AdminListings = () => {
                             <SafeIcon icon={FiCheck} className="h-4 w-4" />
                           </button>
                           <button 
-                            onClick={() => handleReject(listing.id)}
+                            onClick={() => openRejectModal(listing.id)}
                             className="text-red-600 hover:text-red-900"
                           >
                             <SafeIcon icon={FiX} className="h-4 w-4" />

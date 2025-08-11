@@ -50,7 +50,7 @@ const TermsOfService = () => {
               <li><strong>"Content"</strong> refers to any text, images, videos, or other material submitted for guest posts.</li>
               <li><strong>"Listing"</strong> refers to a Publisher's offer to publish guest content on their website for a fee.</li>
               <li><strong>"Order"</strong> refers to a Buyer's purchase of a Publisher's services.</li>
-              <li><strong>"Platform Fee"</strong> refers to the commission we charge for facilitating transactions between Buyers and Publishers.</li>
+              <li><strong>"Platform Fee"</strong> refers to the fee we charge for facilitating transactions between Buyers and Publishers.</li>
             </ul>
             
             <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">3. Account Registration</h2>

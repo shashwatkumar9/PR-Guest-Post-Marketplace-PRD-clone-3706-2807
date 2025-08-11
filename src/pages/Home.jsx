@@ -96,7 +96,7 @@ const Home = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">Transparent Pricing</h3>
-                      <p className="text-gray-600 text-sm">25% platform commission</p>
+                      <p className="text-gray-600 text-sm">No hidden fees</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">

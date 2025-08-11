@@ -31,84 +31,105 @@ const BlogManagement = () => {
     metaDescription: ''
   });
 
-  // Mock blog posts
-  const blogPosts = [
-    {
-      id: 1,
-      title: "10 Strategies for Effective Guest Posting in 2024",
-      slug: "strategies-effective-guest-posting-2024",
-      excerpt: "Learn the top strategies for successful guest posting campaigns that drive traffic and build authority.",
-      content: "<p>Full content here...</p>",
-      featuredImage: "https://images.unsplash.com/photo-1516414447565-b14be0adf13e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "marketing",
-      nicheName: "Marketing & Advertising",
-      tags: ["guest posting", "content marketing", "SEO"],
-      author: "Admin",
-      publishedAt: new Date("2024-01-15"),
-      status: "published",
-      views: 1245
-    },
-    {
-      id: 2,
-      title: "How to Choose the Right Websites for Your Guest Posts",
-      slug: "choose-right-websites-guest-posts",
-      excerpt: "Discover how to identify and select high-quality websites for your guest posting strategy.",
-      content: "<p>Full content here...</p>",
-      featuredImage: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "marketing",
-      nicheName: "Marketing & Advertising",
-      tags: ["website selection", "domain authority", "guest posting"],
-      author: "Admin",
-      publishedAt: new Date("2024-02-10"),
-      status: "published",
-      views: 978
-    },
-    {
-      id: 3,
-      title: "The Impact of Guest Posting on SEO Performance",
-      slug: "impact-guest-posting-seo-performance",
-      excerpt: "Analyze how guest posting affects your website's search engine rankings and overall SEO strategy.",
-      content: "<p>Full content here...</p>",
-      featuredImage: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "seo",
-      nicheName: "SEO",
-      tags: ["SEO", "backlinks", "domain authority"],
-      author: "Admin",
-      publishedAt: new Date("2024-03-05"),
-      status: "published",
-      views: 1543
-    },
-    {
-      id: 4,
-      title: "Writing Compelling Guest Post Pitches That Get Accepted",
-      slug: "writing-compelling-guest-post-pitches",
-      excerpt: "Learn how to craft guest post pitches that stand out and get accepted by top publishers.",
-      content: "<p>Draft content here...</p>",
-      featuredImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "writing",
-      nicheName: "Writing",
-      tags: ["pitching", "content writing", "outreach"],
-      author: "Admin",
-      publishedAt: null,
-      status: "draft",
-      views: 0
-    },
-    {
-      id: 5,
-      title: "Measuring ROI from Your Guest Posting Campaigns",
-      slug: "measuring-roi-guest-posting-campaigns",
-      excerpt: "Discover effective methods to track and measure the return on investment from your guest posting efforts.",
-      content: "<p>Draft content here...</p>",
-      featuredImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      nicheId: "business",
-      nicheName: "Business",
-      tags: ["ROI", "analytics", "marketing metrics"],
-      author: "Admin",
-      publishedAt: null,
-      status: "draft",
-      views: 0
+  // Load blog posts from localStorage or use mock data if none exist
+  const [blogPosts, setBlogPosts] = useState([]);
+  
+  useEffect(() => {
+    // Load blog posts from localStorage
+    const storedBlogPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+    
+    // If no stored blog posts, use mock data
+    if (storedBlogPosts.length === 0) {
+      const mockBlogPosts = [
+        {
+          id: 1,
+          title: "10 Strategies for Effective Guest Posting in 2024",
+          slug: "strategies-effective-guest-posting-2024",
+          excerpt: "Learn the top strategies for successful guest posting campaigns that drive traffic and build authority.",
+          content: "<p>Full content here...</p>",
+          featuredImage: "https://images.unsplash.com/photo-1516414447565-b14be0adf13e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+          nicheId: "marketing",
+          nicheName: "Marketing & Advertising",
+          tags: ["guest posting", "content marketing", "SEO"],
+          author: "Admin",
+          publishedAt: new Date("2024-01-15"),
+          status: "published",
+          views: 1245
+        },
+        {
+          id: 2,
+          title: "How to Choose the Right Websites for Your Guest Posts",
+          slug: "choose-right-websites-guest-posts",
+          excerpt: "Discover how to identify and select high-quality websites for your guest posting strategy.",
+          content: "<p>Full content here...</p>",
+          featuredImage: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+          nicheId: "marketing",
+          nicheName: "Marketing & Advertising",
+          tags: ["website selection", "domain authority", "guest posting"],
+          author: "Admin",
+          publishedAt: new Date("2024-02-10"),
+          status: "published",
+          views: 978
+        },
+        {
+          id: 3,
+          title: "The Impact of Guest Posting on SEO Performance",
+          slug: "impact-guest-posting-seo-performance",
+          excerpt: "Analyze how guest posting affects your website's search engine rankings and overall SEO strategy.",
+          content: "<p>Full content here...</p>",
+          featuredImage: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+          nicheId: "seo",
+          nicheName: "SEO",
+          tags: ["SEO", "backlinks", "domain authority"],
+          author: "Admin",
+          publishedAt: new Date("2024-03-05"),
+          status: "published",
+          views: 1543
+        },
+        {
+          id: 4,
+          title: "Writing Compelling Guest Post Pitches That Get Accepted",
+          slug: "writing-compelling-guest-post-pitches",
+          excerpt: "Learn how to craft guest post pitches that stand out and get accepted by top publishers.",
+          content: "<p>Draft content here...</p>",
+          featuredImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+          nicheId: "writing",
+          nicheName: "Writing",
+          tags: ["pitching", "content writing", "outreach"],
+          author: "Admin",
+          publishedAt: null,
+          status: "draft",
+          views: 0
+        },
+        {
+          id: 5,
+          title: "Measuring ROI from Your Guest Posting Campaigns",
+          slug: "measuring-roi-guest-posting-campaigns",
+          excerpt: "Discover effective methods to track and measure the return on investment from your guest posting efforts.",
+          content: "<p>Draft content here...</p>",
+          featuredImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+          nicheId: "business",
+          nicheName: "Business",
+          tags: ["ROI", "analytics", "marketing metrics"],
+          author: "Admin",
+          publishedAt: null,
+          status: "draft",
+          views: 0
+        }
+      ];
+      
+      // Save mock data to localStorage
+      localStorage.setItem('blogPosts', JSON.stringify(mockBlogPosts));
+      setBlogPosts(mockBlogPosts);
+    } else {
+      // Use stored blog posts with proper date objects
+      const processedPosts = storedBlogPosts.map(post => ({
+        ...post,
+        publishedAt: post.publishedAt ? new Date(post.publishedAt) : null
+      }));
+      setBlogPosts(processedPosts);
     }
-  ];
+  }, []);
 
   // Filter blog posts based on search term
   const filteredPosts = searchTerm
@@ -180,8 +201,27 @@ const BlogManagement = () => {
   };
 
   const handleDeletePost = (postId) => {
-    // In a real app, this would be an API call
-    toast.success('Blog post deleted successfully');
+    try {
+      // Get existing blog posts from localStorage
+      const existingPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+      
+      // Filter out the post to delete
+      const updatedPosts = existingPosts.filter(post => post.id !== postId);
+      
+      // Save updated posts to localStorage
+      localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
+      
+      // Update state
+      setBlogPosts(updatedPosts.map(post => ({
+        ...post,
+        publishedAt: post.publishedAt ? new Date(post.publishedAt) : null
+      })));
+      
+      toast.success('Blog post deleted successfully');
+    } catch (error) {
+      console.error('Error deleting blog post:', error);
+      toast.error('Failed to delete blog post');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -189,12 +229,60 @@ const BlogManagement = () => {
     setLoading(true);
     
     try {
-      // In a real app, this would be an API call to create/update the post
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Get the selected status from the radio buttons
+      const status = document.querySelector('input[name="status"]:checked').value;
+      
+      // Get the niche name based on the selected nicheId
+      const selectedNiche = NICHES.find(niche => niche.id === formData.nicheId);
+      const nicheName = selectedNiche ? selectedNiche.name : '';
+      
+      // Process tags from comma-separated string to array
+      const tagsArray = formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
+      
+      // Create new blog post object
+      const newPost = {
+        id: selectedBlog ? selectedBlog.id : Date.now(),
+        title: formData.title,
+        slug: formData.slug || generateSlug(formData.title),
+        excerpt: formData.excerpt,
+        content: formData.content,
+        featuredImage: formData.featuredImage,
+        nicheId: formData.nicheId,
+        nicheName: nicheName,
+        tags: tagsArray,
+        author: 'Admin', // In a real app, this would come from the logged-in user
+        publishedAt: status === 'published' ? new Date() : null,
+        status: status,
+        views: selectedBlog ? selectedBlog.views : 0
+      };
+      
+      // Get existing blog posts from localStorage
+      const existingPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+      
+      let updatedPosts;
+      if (selectedBlog) {
+        // Update existing post
+        updatedPosts = existingPosts.map(post => 
+          post.id === selectedBlog.id ? newPost : post
+        );
+      } else {
+        // Add new post
+        updatedPosts = [...existingPosts, newPost];
+      }
+      
+      // Save updated posts to localStorage
+      localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
+      
+      // Update state
+      setBlogPosts(updatedPosts.map(post => ({
+        ...post,
+        publishedAt: post.publishedAt ? new Date(post.publishedAt) : null
+      })));
       
       toast.success(selectedBlog ? 'Blog post updated successfully' : 'Blog post created successfully');
       setShowModal(false);
     } catch (error) {
+      console.error('Error saving blog post:', error);
       toast.error('Failed to save blog post');
     } finally {
       setLoading(false);

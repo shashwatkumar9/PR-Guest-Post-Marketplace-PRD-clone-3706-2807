@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -14,6 +14,12 @@ const { FiSearch, FiFilter, FiStar, FiTrendingUp, FiUsers, FiDollarSign, FiGlobe
 
 const Marketplace = () => {
   const { user } = useAuth();
+  
+  // Redirect publishers to My Websites
+  if (user?.role === 'publisher') {
+    return <Navigate to="/my-websites" replace />;
+  }
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedNiche, setSelectedNiche] = useState('');
   const [priceRange, setPriceRange] = useState('');
