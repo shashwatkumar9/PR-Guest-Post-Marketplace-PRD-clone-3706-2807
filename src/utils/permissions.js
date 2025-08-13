@@ -44,10 +44,6 @@ export const PERMISSIONS = {
   // Content Management
   MODERATE_CONTENT: 'moderate_content',
   MANAGE_REVIEWS: 'manage_reviews',
-  MANAGE_CONTENT: 'manage_content',
-  PUBLISH_BLOG: 'publish_blog',
-  EDIT_BLOG: 'edit_blog',
-  DELETE_BLOG: 'delete_blog',
 };
 
 // Role permissions mapping
@@ -68,9 +64,6 @@ export const ROLE_PERMISSIONS = {
     PERMISSIONS.MANAGE_REVIEWS,
     PERMISSIONS.MANAGE_DISPUTES,
     PERMISSIONS.VIEW_ANALYTICS,
-    PERMISSIONS.MANAGE_CONTENT,
-    PERMISSIONS.PUBLISH_BLOG,
-    PERMISSIONS.EDIT_BLOG,
   ],
   
   [ROLES.PUBLISHER]: [

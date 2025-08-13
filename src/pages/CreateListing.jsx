@@ -5,84 +5,31 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
-import { useAuth } from '../contexts/AuthContext';
 
 const { FiGlobe, FiDollarSign, FiClock, FiFileText, FiInfo } = FiIcons;
 
 const CreateListing = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { user } = useAuth();
-  
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  
+
   const basePrice = watch('basePrice');
-  const finalPrice = basePrice ? parseInt(basePrice) : 0;
-  
+  const finalPrice = basePrice ? Math.round(basePrice * 1.25) : 0;
+
   const niches = [
     'Technology', 'Health & Wellness', 'Finance', 'Business', 'Lifestyle',
     'Travel', 'Food & Cooking', 'Fashion', 'Education', 'Sports',
     'Entertainment', 'Science', 'Environment', 'Politics', 'Real Estate'
   ];
-  
+
   const onSubmit = async (data) => {
     setLoading(true);
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Add the new listing to mock data (in a real app, this would be an API call)
-      const newListing = {
-        id: `listing-${Date.now()}`,
-        title: data.title,
-        description: data.description,
-        niche: data.niche,
-        nicheId: data.niche.toLowerCase().replace(/\s+/g, '-'),
-        da: parseInt(data.domainAuthority) || 50,
-        traffic: data.monthlyTraffic || '10K',
-        price: parseInt(data.basePrice),
-        basePrice: parseInt(data.basePrice),
-        rating: 5.0,
-        reviews: 0,
-        turnaround: data.turnaround,
-        featured: false,
-        website: data.websiteUrl,
-        languages: [{ code: 'en', name: 'English' }],
-        publisher: {
-          name: user.name,
-          avatar: user.avatar,
-          rating: 5.0,
-          completedOrders: 0,
-          responseTime: '2 hours'
-        },
-        guidelines: data.contentGuidelines ? data.contentGuidelines.split('\n').filter(g => g.trim()) : [],
-        sampleArticles: [],
-        analytics: {
-          monthlyVisitors: data.monthlyTraffic || '10K',
-          bounceRate: '35%',
-          avgSessionDuration: '2:30',
-          topCountries: ['United States', 'United Kingdom', 'Canada']
-        },
-        status: 'pending', // Set initial status to pending for admin review
-        createdAt: new Date()
-      };
-      
-      // Store in localStorage for demo purposes
-      const existingListings = JSON.parse(localStorage.getItem('userListings') || '[]');
-      existingListings.push(newListing);
-      localStorage.setItem('userListings', JSON.stringify(existingListings));
-      
-      // Store pending listings separately for admin review
-      const pendingListings = JSON.parse(localStorage.getItem('pendingListings') || '[]');
-      pendingListings.push(newListing);
-      localStorage.setItem('pendingListings', JSON.stringify(pendingListings));
-      
-      // Note: We don't add to MOCK_LISTINGS immediately anymore - it will be added after admin approval
-      
-      toast.success('Listing created successfully! It will be reviewed by our team before appearing in the marketplace.');
+      toast.success('Listing created successfully! It will be reviewed by our team.');
       navigate('/dashboard');
     } catch (error) {
-      console.error('Error creating listing:', error);
       toast.error('Failed to create listing');
     } finally {
       setLoading(false);
@@ -115,6 +62,7 @@ const CreateListing = () => {
           {/* Website Information */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Website Information</h2>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -141,6 +89,7 @@ const CreateListing = () => {
                   <p className="mt-1 text-sm text-red-600">{errors.websiteUrl.message}</p>
                 )}
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Website Title *
@@ -161,6 +110,7 @@ const CreateListing = () => {
                   <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>
                 )}
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Primary Niche *
@@ -178,6 +128,7 @@ const CreateListing = () => {
                   <p className="mt-1 text-sm text-red-600">{errors.niche.message}</p>
                 )}
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Domain Authority (DA)
@@ -197,6 +148,7 @@ const CreateListing = () => {
                   <p className="mt-1 text-sm text-red-600">{errors.domainAuthority.message}</p>
                 )}
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Monthly Traffic
@@ -208,6 +160,7 @@ const CreateListing = () => {
                   placeholder="50K"
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Turnaround Time *
@@ -228,6 +181,7 @@ const CreateListing = () => {
                 )}
               </div>
             </div>
+
             <div className="mt-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Website Description *
@@ -253,10 +207,11 @@ const CreateListing = () => {
           {/* Pricing */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Pricing</h2>
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Your Price (USD) *
+                  Your Base Price (USD) *
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -278,15 +233,52 @@ const CreateListing = () => {
                 {errors.basePrice && (
                   <p className="mt-1 text-sm text-red-600">{errors.basePrice.message}</p>
                 )}
-                <p className="mt-1 text-sm text-gray-500">Price for guest posts</p>
+                <p className="mt-1 text-sm text-gray-500">Amount you'll receive</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Platform Fee (25%)
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <SafeIcon icon={FiDollarSign} className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    value={basePrice ? (basePrice * 0.25).toFixed(0) : '0'}
+                    disabled
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
+                  />
+                </div>
+                <p className="mt-1 text-sm text-gray-500">Automatic calculation</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Final Price for Buyers
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <SafeIcon icon={FiDollarSign} className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    value={finalPrice}
+                    disabled
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500 font-semibold"
+                  />
+                </div>
+                <p className="mt-1 text-sm text-gray-500">What buyers will pay</p>
               </div>
             </div>
+
             <div className="mt-4 p-4 bg-blue-50 rounded-lg">
               <div className="flex">
                 <SafeIcon icon={FiInfo} className="h-5 w-5 text-blue-400 mt-0.5 mr-3" />
                 <div className="text-sm text-blue-700">
                   <p className="font-medium">Pricing Information</p>
-                  <p>Set your desired price for guest posts. Our platform handles secure payment processing and provides comprehensive support.</p>
+                  <p>Our platform charges a 25% commission on all transactions. This fee covers payment processing, platform maintenance, and customer support.</p>
                 </div>
               </div>
             </div>
@@ -295,6 +287,7 @@ const CreateListing = () => {
           {/* Content Guidelines */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Content Guidelines</h2>
+            
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -313,6 +306,7 @@ const CreateListing = () => {
                   <p className="mt-1 text-sm text-red-600">{errors.minWordCount.message}</p>
                 )}
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Maximum Backlinks Allowed
@@ -332,6 +326,7 @@ const CreateListing = () => {
                   <p className="mt-1 text-sm text-red-600">{errors.maxBacklinks.message}</p>
                 )}
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Content Guidelines & Requirements
@@ -343,6 +338,7 @@ const CreateListing = () => {
                   placeholder="Specify your content requirements, style preferences, prohibited topics, etc."
                 />
               </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="flex items-center">
@@ -354,6 +350,7 @@ const CreateListing = () => {
                     <span className="ml-2 text-sm text-gray-700">Allow do-follow links</span>
                   </label>
                 </div>
+
                 <div>
                   <label className="flex items-center">
                     <input

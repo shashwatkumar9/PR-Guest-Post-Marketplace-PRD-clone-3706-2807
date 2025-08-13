@@ -13,9 +13,8 @@ import AdminListings from './AdminListings';
 import AdminTransactions from './AdminTransactions';
 import AdminSettings from './AdminSettings';
 import UserRoleManagement from './UserRoleManagement';
-import BlogManagement from './BlogManagement';
 
-const { FiHome, FiUsers, FiFileText, FiCreditCard, FiSettings, FiMenu, FiX, FiShield, FiEdit } = FiIcons;
+const { FiHome, FiUsers, FiFileText, FiCreditCard, FiSettings, FiMenu, FiX, FiShield } = FiIcons;
 
 const AdminPanel = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -56,13 +55,6 @@ const AdminPanel = () => {
       icon: FiCreditCard,
       current: location.pathname === '/admin/transactions',
       permission: PERMISSIONS.VIEW_ALL_TRANSACTIONS
-    },
-    {
-      name: 'Blog',
-      href: '/admin/blog',
-      icon: FiEdit,
-      current: location.pathname === '/admin/blog',
-      permission: PERMISSIONS.MANAGE_CONTENT
     },
     {
       name: 'Settings',
@@ -163,7 +155,6 @@ const AdminPanel = () => {
             <Route path="/roles" element={<UserRoleManagement />} />
             <Route path="/listings" element={<AdminListings />} />
             <Route path="/transactions" element={<AdminTransactions />} />
-            <Route path="/blog" element={<BlogManagement />} />
             <Route path="/settings" element={<AdminSettings />} />
           </Routes>
         </main>

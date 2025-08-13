@@ -3,14 +3,12 @@ import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
-import { useAuth } from '../contexts/AuthContext';
 
 const { FiDollarSign, FiDownload, FiEye, FiFilter, FiCalendar } = FiIcons;
 
 const Transactions = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [dateRange, setDateRange] = useState('all');
-  const { user } = useAuth();
 
   const transactions = [
     {
@@ -299,7 +297,7 @@ const Transactions = () => {
                         <div className={`font-medium ${getTypeColor(transaction.type)}`}>
                           {getTypeIcon(transaction.type)}${transaction.netAmount.toFixed(2)}
                         </div>
-                        {transaction.fee > 0 && user?.role === 'admin' && (
+                        {transaction.fee > 0 && (
                           <div className="text-xs text-gray-500">
                             Fee: ${transaction.fee.toFixed(2)}
                           </div>

@@ -41,29 +41,16 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {user?.role === 'publisher' ? (
-              <Link
-                to="/my-websites"
-                className={`${
-                  isActive('/my-websites')
-                    ? 'text-primary-600'
-                    : 'text-gray-700 hover:text-primary-600'
-                } transition-colors duration-200`}
-              >
-                My Websites
-              </Link>
-            ) : (
-              <Link
-                to="/marketplace"
-                className={`${
-                  isActive('/marketplace')
-                    ? 'text-primary-600'
-                    : 'text-gray-700 hover:text-primary-600'
-                } transition-colors duration-200`}
-              >
-                Marketplace
-              </Link>
-            )}
+            <Link
+              to="/marketplace"
+              className={`${
+                isActive('/marketplace')
+                  ? 'text-primary-600'
+                  : 'text-gray-700 hover:text-primary-600'
+              } transition-colors duration-200`}
+            >
+              Marketplace
+            </Link>
 
             {user ? (
               <>
@@ -214,23 +201,13 @@ const Navbar = () => {
             className="md:hidden bg-white border-t border-gray-200"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {user?.role === 'publisher' ? (
-                <Link
-                  to="/my-websites"
-                  className="block px-3 py-2 text-gray-700 hover:text-primary-600 transition-colors duration-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  My Websites
-                </Link>
-              ) : (
-                <Link
-                  to="/marketplace"
-                  className="block px-3 py-2 text-gray-700 hover:text-primary-600 transition-colors duration-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Marketplace
-                </Link>
-              )}
+              <Link
+                to="/marketplace"
+                className="block px-3 py-2 text-gray-700 hover:text-primary-600 transition-colors duration-200"
+                onClick={() => setIsOpen(false)}
+              >
+                Marketplace
+              </Link>
 
               {user ? (
                 <>

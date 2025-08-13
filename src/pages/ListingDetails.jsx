@@ -178,7 +178,7 @@ const ListingDetails = () => {
               <div className="text-center mb-6">
                 <div className="text-3xl font-bold text-gray-900">${listing.price}</div>
                 <div className="text-sm text-gray-500">
-                  Guest post price
+                  Base: ${listing.basePrice} + 25% commission
                 </div>
               </div>
 
@@ -203,6 +203,7 @@ const ListingDetails = () => {
               >
                 Purchase Guest Post
               </button>
+
               <button className="w-full border border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-50 transition-colors font-medium">
                 <SafeIcon icon={FiMessageSquare} className="h-5 w-5 inline mr-2" />
                 Contact Publisher
@@ -217,8 +218,13 @@ const ListingDetails = () => {
               className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
             >
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Publisher</h3>
+              
               <div className="flex items-center mb-4">
-                <img src={listing.publisher.avatar} alt={listing.publisher.name} className="w-12 h-12 rounded-full mr-3" />
+                <img 
+                  src={listing.publisher.avatar} 
+                  alt={listing.publisher.name}
+                  className="w-12 h-12 rounded-full mr-3"
+                />
                 <div>
                   <div className="font-medium text-gray-900">{listing.publisher.name}</div>
                   <div className="flex items-center">
@@ -277,7 +283,6 @@ const ListingDetails = () => {
                 <span>${listing.price}</span>
               </div>
             </div>
-
             <div className="flex space-x-3">
               <button
                 onClick={() => setShowPurchaseModal(false)}

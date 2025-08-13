@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -47,7 +46,7 @@ const Dashboard = () => {
           </h1>
           <p className="text-gray-600 mt-2">
             {user?.role === 'publisher' 
-              ? 'Manage your website listings and track your performance'
+              ? 'Manage your listings and track your earnings'
               : 'Track your campaigns and discover new opportunities'
             }
           </p>
@@ -89,25 +88,25 @@ const Dashboard = () => {
               <div className="space-y-3">
                 {user?.role === 'publisher' ? (
                   <>
-                    <Link to="/create-listing" className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                    <button className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
                       <SafeIcon icon={FiPlus} className="h-5 w-5 mr-2" />
                       Create New Listing
-                    </Link>
-                    <Link to="/my-websites" className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    </button>
+                    <button className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                       <SafeIcon icon={FiEye} className="h-5 w-5 mr-2" />
-                      My Websites
-                    </Link>
+                      View Analytics
+                    </button>
                   </>
                 ) : (
                   <>
-                    <Link to="/marketplace" className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                    <button className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
                       <SafeIcon icon={FiEye} className="h-5 w-5 mr-2" />
                       Browse Marketplace
-                    </Link>
-                    <Link to="/transactions" className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    </button>
+                    <button className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                       <SafeIcon icon={FiTrendingUp} className="h-5 w-5 mr-2" />
-                      My Transactions
-                    </Link>
+                      Campaign Analytics
+                    </button>
                   </>
                 )}
               </div>
